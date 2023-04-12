@@ -1,8 +1,7 @@
-import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
-import { getQuestions, CategoryNames, QuestionDifficulties, QuestionTypes } from 'open-trivia-db';
-const cors = require('cors');
 dotenv.config();
+import express, { Express, Request, Response } from 'express';
+import { getQuestions, CategoryNames, QuestionDifficulties, QuestionTypes } from 'open-trivia-db';
 
 const app: Express = express();
 const port = process.env.PORT;
