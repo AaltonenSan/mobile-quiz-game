@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Quiz from '../screens/Quiz';
@@ -9,7 +9,7 @@ const Stack = createStackNavigator();
 
 export default function HomeStack() {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={DarkTheme}>
       <Stack.Navigator>
         <Stack.Screen name="UserStack" component={UserStack} options={{ headerShown: false }} />
         <Stack.Screen name="Quiz" component={Quiz} options={{ headerShown: false }} />

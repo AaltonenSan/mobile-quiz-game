@@ -7,7 +7,7 @@ export function useAuthentication() {
   const [user, setUser] = useState<User>();
 
   useEffect(() => {
-    const unsubscribeFromAuthStatuChanged = onAuthStateChanged(auth, (user) => {
+    const unsubscribeFromAuthStateChanged = onAuthStateChanged(auth, (user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/v8/firebase.User
@@ -18,7 +18,7 @@ export function useAuthentication() {
       }
     });
 
-    return unsubscribeFromAuthStatuChanged;
+    return unsubscribeFromAuthStateChanged;
   }, []);
 
   return { user };

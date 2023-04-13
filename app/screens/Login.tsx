@@ -1,55 +1,139 @@
-import { Button, Input } from "@rneui/themed";
 import { useState } from "react";
-import { StyleSheet, Text } from "react-native";
-import { View } from "react-native";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { Button } from "@rneui/themed";
+import { StyleSheet, Text, TextInput, View } from "react-native";
+import { getAuth, reload, sendPasswordResetEmail, signInWithEmailAndPassword, updateCurrentUser } from "firebase/auth";
+import AwesomeAlert from "react-native-awesome-alerts";
 
 const auth = getAuth()
+const actionCodeSettings = {
+  url: 'https://www.example.com/?email=user@example.com',
+  iOS: {
+    bundleId: 'com.example.ios'
+  },
+  android: {
+    packageName: 'com.example.android',
+    installApp: true,
+    minimumVersion: '12'
+  },
+  handleCodeInApp: true
+}
 
-export default function SignUp() {
+export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [msg, setMsg] = useState('')
+  const [showAlert, setShowAlert] = useState(false)
+  const [message, setMessage] = useState('')
 
   const login = async () => {
     if (email === '' || password === '') {
-      setMsg('Email and password are needed')
+      setMessage('Email and password \n are required!')
+      setShowAlert(true)
       return
     }
 
     try {
       await signInWithEmailAndPassword(auth, email, password)
+      await reload(auth.currentUser)
+      if (!auth.currentUser.emailVerified) {
+        setMessage('Please verify your email to continue')
+        setShowAlert(true)
+      }
     } catch (error) {
-      setMsg(error.message)
+      console.log(error)
+      setMessage('Wrong credentials!')
+      setShowAlert(true)
+      setPassword('')
+    }
+  }
+
+  const resetPassword = async () => {
+    try {
+      await sendPasswordResetEmail(auth, email, actionCodeSettings)
+    } catch (error) {
+      console.log(error)
     }
   }
 
   return (
-    <View>
-      <Text>Signup Page</Text>
-
-      {msg && <Text>{msg}</Text>}
-      <View>
-        <Input
-          placeholder='email'
+    <View style={styles.container}>
+      <View style={styles.inputView}>
+        <TextInput
+          cursorColor='#FFA500'
+          placeholder='Email'
+          style={styles.input}
           value={email}
           onChangeText={(text) => setEmail(text)}
         />
-        <Input
-          placeholder='password'
+        <TextInput
+          secureTextEntry={true}
+          cursorColor='#FFA500'
+          placeholder='Password'
+          style={styles.input}
           value={password}
           onChangeText={(text) => setPassword(text)}
         />
-        <Button title='Login' onPress={login} />
       </View>
+      <View style={styles.buttonView}>
+        <Button
+          buttonStyle={styles.button}
+          titleStyle={styles.buttonTitle}
+          title='Login'
+          onPress={login}
+        />
+        <Text
+          style={{ color: 'white' }}
+          onPress={() => resetPassword()}
+        >
+          Forgot password?
+        </Text>
+      </View>
+      <AwesomeAlert
+        show={showAlert}
+        title={message}
+        titleStyle={{ textAlign: 'center' }}
+        closeOnTouchOutside={true}
+        closeOnHardwareBackPress={true}
+        onDismiss={() => setShowAlert(false)}
+        onConfirmPressed={() => setShowAlert(false)}
+        showConfirmButton={true}
+        confirmText='Close'
+        confirmButtonColor='#FFA500'
+        confirmButtonTextStyle={{ color: '#424242' }}
+      />
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  contentView: {
+  container: {
     flex: 1,
+    backgroundColor: '#0F3057',
+  },
+  inputView: {
+    marginTop: 150,
+    marginBottom: 50,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  buttonView: {
+    alignItems: 'center'
+  },
+  button: {
+    backgroundColor: '#FFA500',
+    marginVertical: 10,
+    borderRadius: 15,
+    width: 200
+  },
+  buttonTitle: {
+    color: '#424242'
+  },
+  input: {
+    width: 250,
+    marginVertical: 10,
+    borderRadius: 15,
+    borderWidth: 4,
+    borderColor: '#FFA500',
+    backgroundColor: 'white',
+    padding: 10,
   }
 })
