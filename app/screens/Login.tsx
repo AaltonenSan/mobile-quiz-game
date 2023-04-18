@@ -3,6 +3,8 @@ import { Button } from "@rneui/themed";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import { getAuth, reload, sendPasswordResetEmail, signInWithEmailAndPassword, updateCurrentUser } from "firebase/auth";
 import AwesomeAlert from "react-native-awesome-alerts";
+import { AuthStackScreenProps } from "../types/NavigationTypes";
+import { MenuButtonTitleStyle, MenuButtonStyle } from "../theme/theme";
 
 const auth = getAuth()
 const actionCodeSettings = {
@@ -18,7 +20,7 @@ const actionCodeSettings = {
   handleCodeInApp: true
 }
 
-export default function Login() {
+export default function Login({ navigation, route }: AuthStackScreenProps<'Login'>) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showAlert, setShowAlert] = useState(false)
@@ -75,8 +77,8 @@ export default function Login() {
       </View>
       <View style={styles.buttonView}>
         <Button
-          buttonStyle={styles.button}
-          titleStyle={styles.buttonTitle}
+          buttonStyle={MenuButtonStyle}
+          titleStyle={MenuButtonTitleStyle}
           title='Login'
           onPress={login}
         />
@@ -117,15 +119,6 @@ const styles = StyleSheet.create({
   },
   buttonView: {
     alignItems: 'center'
-  },
-  button: {
-    backgroundColor: '#FFA500',
-    marginVertical: 10,
-    borderRadius: 15,
-    width: 200
-  },
-  buttonTitle: {
-    color: '#424242'
   },
   input: {
     width: 250,

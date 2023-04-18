@@ -1,13 +1,13 @@
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import Home from '../screens/Home';
 import Profile from '../screens/Profile'
 import HighScores from '../screens/HighScores';
+import { UserTabParamList } from '../types/NavigationTypes';
 
-const Tab = createBottomTabNavigator()
+const Tab = createBottomTabNavigator<UserTabParamList>()
 
-export default function UserStack() {
+export default function UserTab() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
