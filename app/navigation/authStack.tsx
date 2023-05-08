@@ -15,9 +15,9 @@ export default function AuthStack() {
     <NavigationContainer theme={DarkTheme}>
       <Stack.Navigator>
         <Stack.Screen options={{ headerShown: false }} name="Welcome" component={Welcome} />
-        <Stack.Screen options={{ headerShown: false }} name="Login" component={Login} />
-        <Stack.Screen options={{ headerShown: false }} name="SignUp" component={SignUp} />
-        <Stack.Screen options={{ headerShown: false }} name='Quiz' component={Quiz} />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen options={{ headerShown: false }} name='Quiz' component={Quiz} initialParams={{ logged: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

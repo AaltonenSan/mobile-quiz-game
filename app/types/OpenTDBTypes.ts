@@ -11,3 +11,13 @@ export interface Result {
   correct_answer: string;
   incorrect_answers: string[];
 }
+
+export interface Difficulty {
+  label: string;
+  value: string;
+}
+
+export interface Category {
+  label: string;
+  value: number;
+}

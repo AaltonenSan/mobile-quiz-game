@@ -42,7 +42,7 @@ export default function Welcome({ navigation, route }: AuthStackScreenProps<'Wel
         show={showAlert}
         title={'Continue without \n creating an account?'}
         titleStyle={{ textAlign: 'center' }}
-        message="You won't have access to certain features like the leaderboard!"
+        message="You won't have access to certain features like the Wall of Fame and custom questions!"
         messageStyle={{ textAlign: 'center' }}
         closeOnTouchOutside={true}
         closeOnHardwareBackPress={true}

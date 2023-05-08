@@ -3,17 +3,36 @@ import { CompositeScreenProps, NavigatorScreenParams } from "@react-navigation/n
 import { StackScreenProps } from "@react-navigation/stack";
 
 export type QuizScreenParamList = {
-  Quiz: undefined;
+  Quiz: {
+    logged: boolean;
+    category: number;
+    difficulty: string;
+    type: string;
+  };
+  Welcome: undefined;
+  UserTab: undefined;
+  WallOfFame: undefined;
 };
 
 export type QuizScreenProps<T extends keyof QuizScreenParamList> =
   StackScreenProps<QuizScreenParamList, T>;
 
+export type QuizSetupScreenParamList = {
+  QuizSetup: undefined;
+  Quiz: {
+    category: number;
+    difficulty: string;
+  };
+}
+
+export type QuizSetupScreenProps<T extends keyof QuizSetupScreenParamList> =
+  StackScreenProps<QuizSetupScreenParamList, T>
+
 export type AuthStackParamList = {
   Welcome: undefined;
   Login: undefined;
   SignUp: undefined;
-  Quiz: QuizScreenProps<'Quiz'>;
+  Quiz: { logged: boolean };
 };
 
 export type AuthStackScreenProps<T extends keyof AuthStackParamList> =
@@ -21,7 +40,11 @@ export type AuthStackScreenProps<T extends keyof AuthStackParamList> =
 
 export type HomeStackParamList = {
   UserTab: NavigatorScreenParams<UserTabParamList>;
-  Quiz: QuizScreenProps<'Quiz'>;
+  QuizSetup: undefined;
+  Quiz: {
+    logged: boolean;
+    type: string;
+  };
 };
 
 export type HomeStackScreenProps<T extends keyof HomeStackParamList> =
@@ -29,7 +52,7 @@ export type HomeStackScreenProps<T extends keyof HomeStackParamList> =
 
 export type UserTabParamList = {
   Home: undefined;
-  Highscores: undefined;
+  WallOfFame: undefined;
   Profile: undefined;
 };
 

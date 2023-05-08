@@ -5,12 +5,14 @@ import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "
 import AwesomeAlert from "react-native-awesome-alerts";
 import { AuthStackScreenProps } from "../types/NavigationTypes";
 import { MenuButtonStyle, MenuButtonTitleStyle } from "../theme/theme";
+import { createUser } from "../utils/firestore";
 
 const auth = getAuth()
 
 export default function SignUp({ navigation, route }: AuthStackScreenProps<'SignUp'>) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [username, setUsername] = useState('')
   const [showAlert, setShowAlert] = useState(false)
   const [message, setMessage] = useState('')
 
@@ -22,8 +24,9 @@ export default function SignUp({ navigation, route }: AuthStackScreenProps<'Sign
     }
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password)
+      const newUser = await createUserWithEmailAndPassword(auth, email, password)
       await sendEmailVerification(auth.currentUser)
+      await createUser(username, newUser.user.uid, newUser.user.email)
       setMessage('Check your email for verification link!')
       setShowAlert(true)
     } catch (error) {
@@ -45,6 +48,13 @@ export default function SignUp({ navigation, route }: AuthStackScreenProps<'Sign
           style={styles.input}
           value={email}
           onChangeText={(text) => setEmail(text)}
+        />
+        <TextInput
+          cursorColor='#FFA500'
+          placeholder='Username'
+          style={styles.input}
+          value={username}
+          onChangeText={(text) => setUsername(text)}
         />
         <TextInput
           secureTextEntry={true}
