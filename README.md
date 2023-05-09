@@ -1,9 +1,8 @@
 # Mobile Quiz Game
 
-Quiz game for mobile devices made with React Native, Expo and TypeScript. App uses Firebase as a database and for user handling. The questions come from [Open Trivia API](https://opentdb.com/). To get the UI nicer-looking some components from [React Native Elements](https://reactnativeelements.com/) were used and [React Native Awesome Alerts](https://github.com/rishabhbhatia/react-native-awesome-alerts).
+Quiz game for mobile devices made with React Native, Expo and TypeScript. App uses Firebase as a database and for user handling. The questions come from [Open Trivia API](https://opentdb.com/). To get the UI nicer-looking some components from [React Native Elements](https://reactnativeelements.com/) and [React Native Awesome Alerts](https://github.com/rishabhbhatia/react-native-awesome-alerts) were used.
 
 The game has a Quick Quiz mode for unregistered users that simply asks 10 random questions. Registered users can create custom quizes choosing from multiple categories and difficulties. Registered users can also try the challenge which consist of 10 questions from random categories that get harder and harder. Players that pass the challenge get their name on the Wall of Fame.
-
 
 ## Screenshots
 
