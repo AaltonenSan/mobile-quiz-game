@@ -1,6 +1,6 @@
 import { ActivityIndicator, Modal, StyleSheet, Text, TextInput, View } from "react-native";
-import { Button, Card, Icon, Input } from "@rneui/themed";
-import { getAuth, signOut } from "firebase/auth";
+import { Button, Card, Icon } from "@rneui/themed";
+import { signOut } from "firebase/auth";
 import { UserTabScreenProps } from "../types/NavigationTypes";
 import { MenuButtonStyle, MenuButtonTitleStyle } from "../theme/theme";
 import { useEffect, useState } from "react";

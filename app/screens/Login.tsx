@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Button } from "@rneui/themed";
 import { StyleSheet, Text, TextInput, View } from "react-native";
-import { getAuth, reload, sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
+import { reload, sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
 import AwesomeAlert from "react-native-awesome-alerts";
 import { AuthStackScreenProps } from "../types/NavigationTypes";
 import { MenuButtonTitleStyle, MenuButtonStyle } from "../theme/theme";
+import { auth } from "../config/firebase";
 
-const auth = getAuth()
 const actionCodeSettings = {
   url: 'https://www.example.com/?email=user@example.com',
   iOS: {

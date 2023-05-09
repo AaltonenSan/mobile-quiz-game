@@ -37,7 +37,6 @@ export default function Welcome({ navigation, route }: AuthStackScreenProps<'Wel
         title='Quick Quiz'
         onPress={() => setShowAlert(true)}
       />
-
       <AwesomeAlert
         show={showAlert}
         title={'Continue without \n creating an account?'}

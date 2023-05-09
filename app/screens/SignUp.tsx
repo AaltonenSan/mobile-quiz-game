@@ -6,8 +6,7 @@ import AwesomeAlert from "react-native-awesome-alerts";
 import { AuthStackScreenProps } from "../types/NavigationTypes";
 import { MenuButtonStyle, MenuButtonTitleStyle } from "../theme/theme";
 import { createUser } from "../utils/firestore";
-
-const auth = getAuth()
+import { auth } from "../config/firebase";
 
 export default function SignUp({ navigation, route }: AuthStackScreenProps<'SignUp'>) {
   const [email, setEmail] = useState('')

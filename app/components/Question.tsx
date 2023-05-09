@@ -59,7 +59,6 @@ export default function Question({ data, questionNum, setQuestionNum, score, set
         setSelected(null)
       }, 2000)
     }
-
   }
 
   const checkAnswer = (answer: string, idx: number): ViewStyle => {
